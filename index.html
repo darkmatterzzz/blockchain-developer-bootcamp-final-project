@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn kids to save with $CANDY</title>
+    <script src="app.js" type="module"/>
+</head>
+<body class="pt-4" x-data="app()">
+
+<div class="w-full px-4 flex" x-show="connected">
+    <div class="w-1/2 text-left">$CANDY🍬</div>
+    <div class="w-1/2 text-right">
+        <div x-show="txPending">$CANDY🍬 tx pending...</div>
+    </div>
+
+</div>
+
+<div class="w-full py-16 flex justify-center" x-show="!connected">
+    <div class="md:w-1/3 text-center">
+        <h1 class="text-3xl">Learn kids to save early with $CANDY🍬</h1>
+        <p class="pt-4">Our mission is build applications that help you teach your children<br>that saving can be fun
+            and entertaining.</p>
+    </div>
+</div>
+
+<div x-cloak class="w-full py-4 flex justify-center" x-show="!connected">
+    <div class="md:w-1/3 text-center px-16">
+        <div class="bg-black text-white rounded-xl p-8">
+            <h2 class="text-xl">Playfull environment for young & old</h2>
+        </div>
+    </div>
+    <div class="md:w-1/3 text-center px-16">
+        <div class="bg-black text-white rounded-xl p-8">
+            <h2 class="text-xl">Save & compound* inside your $CANDY🍬 factories</h2>
+        </div>
+    </div>
+    <div class="md:w-1/3 text-center px-16">
+        <div class="bg-black text-white rounded-xl p-8">
+            <h2 class="text-xl">Build on top of Olympus DAO Mechanism*</h2>
+            <p>*(On the roadmap ;))</p>
+        </div>
+    </div>
+</div>
+
+<div class="w-full py-4" x-show="mySaveables.length">
+    <div class="w-full text-center"><h2>Your saving accounts: </h2></div>
+    <div class="w-full flex justify-around">
+        <div class="w-full flex-wrap flex justify-around">
+            <template x-for="saveable in mySaveables">
+                <div class="w-1/3 p-4 bg-">
+                    <template x-if="mySaveablesData[saveable]">
+                        <div class="m-4">
+                            Saving account: <span x-text="mySaveablesData[saveable].name"></span>
+
+                            <div class="text-xl text-center">Balance: <span x-text="window.web3.utils.fromWei(mySaveablesData[saveable].amount, 'ether')"></span>Ξ</div>
+
+
+                            <div class="flex w-full mb-2">
+                                <input type="number" x-model="amount" class="w-2/3">
+                                <button class="w-1/3 bg-green-400 text-white p-2 rounded-lg" x-on:click="topUpSaveable(saveable)">Save</button>
+                            </div>
+                            <div :class="{'opacity-25':mySaveablesData[saveable].locked}">
+                            <div class="flex w-full mb-2">
+                                <input type="number" x-model="amount" class="w-2/3">
+                                <button class="w-1/3 bg-yellow-400 text-white p-2 rounded-lg" x-on:click="withdrawSaveable(saveable)">Unsave</button>
+                            </div>
+                            </div>
+                            <button class="bg-red-400 mb-2 text-white w-full p-2 rounded-lg" x-on:click="liquidateSaveable(saveable)">Liquidate</button>
+                            <!--<div>#<span x-text="saveable"></span></div>-->
+
+                            <div class="text-center" x-show="!mySaveablesData[saveable].locked">
+                                <button class="text-center" x-on:click="lockSaveable(saveable)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg> Lock saveable (wont be able to withdraw)</button>
+                            </div>
+
+                            <div class="text-center" x-show="mySaveablesData[saveable].locked">
+                                <button class="text-center" x-on:click="unlockSaveable(saveable)"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                                </svg> Unlock saveable</button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="w-full py-4" x-show="myAccessibles.length">
+    <div class="w-full text-center"><h2>Your accessible accounts: </h2></div>
+    <div class="w-full flex justify-around">
+        <div class="w-full flex-wrap flex justify-around">
+            <template x-for="saveable in myAccessibles">
+                <div class="w-1/3 p-4 bg-">
+                    <template x-if="myAccessiblesData[saveable]">
+                        <div class="m-4">
+                            Saving account: <span x-text="myAccessiblesData[saveable].name"></span>
+
+                            <div class="text-xl text-center">Balance: <span x-text="window.web3.utils.fromWei(myAccessiblesData[saveable].amount, 'ether')"></span>Ξ</div>
+
+
+                            <div class="flex w-full mb-2">
+                                <input type="number" x-model="amount" class="w-2/3">
+                                <button class="w-1/3 bg-green-400 text-white p-2 rounded-lg" x-on:click="topUpSaveable(saveable)">Save</button>
+                            </div>
+                            <div :class="{'opacity-25':myAccessiblesData[saveable].locked}">
+                                <div class="flex w-full mb-2">
+                                    <input type="number" x-model="amount" class="w-2/3">
+                                    <button class="w-1/3 bg-yellow-400 text-white p-2 rounded-lg" x-on:click="withdrawSaveable(saveable, myAccessiblesData[saveable].locked)">Unsave</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </div>
+</div>
+
+<div class="absolute bottom-0 left-0 w-1/4 bg-red-400 text-left p-4 text-white" x-show="error">
+    <div x-text="errorMessage"></div>
+</div>
+
+<div x-show="connected && !mySaveables.length" class="p-4 text-center">
+    No accounts found, create one?
+</div>
+
+<div class="flex justify-center" x-show="connected">
+    <div class="bg-green-100 w-1/3 p-4">
+        <label class="w-full block">
+            Label:<br>
+            <input type="text" x-model="account_label">
+        </label>
+        <label class="block">
+            <input type="checkbox" value="1" x-model="accessible">
+            Other wallet address may withdraw
+        </label>
+        <label class="block w-full" x-show="accessible">
+            Accessible by:<br>
+            <input type="text" x-model="second_wallet">
+        </label>
+        <button x-on:click="createSaveable" class="bg-yellow-500 hover:bg-yellow-800 p-4 rounded-xl text-white">
+            Create savings account
+        </button>
+    </div>
+</div>
+
+<div id="app" class="w-full py-16 flex justify-center">
+
+    <div x-show="!connected">
+
+        <button x-show="!connecting && !unsupportedNetwork" x-on:click="bootApp()"
+                class="bg-yellow-500 hover:bg-yellow-800 p-4 rounded-xl text-white">
+            Connect your web3 wallet
+        </button>
+        <p x-show="unsupportedNetwork">Seems that you are on another network... Switch to Rinkeby</p>
+        <p x-cloak x-show="connecting">Connecting with your wallet... </p>
+    </div>
+    <div x-show="connected">
+        Connected with:
+        <div x-text="account"></div>
+        <br>
+        Balance:
+        <div x-text="balance"></div>
+        <br>
+    </div>
+
+    <button id="loadAccounts" style="left: -9999px" class="absolute" x-on:click="loadAccounts()">Load accounts</button>
+    <button id="rejected" style="left: -9999px" class="absolute" x-on:click="rejected()">Rejected</button>
+    <button id="wrongNetwork" style="left: -9999px" class="absolute" x-on:click="wrongNetwork()">Wrong Network</button>
+    <button id="noWallet" style="left: -9999px" class="absolute" x-on:click="noWallet()">No wallet</button>
+
+</div>
+
+
+</body>
+</html>

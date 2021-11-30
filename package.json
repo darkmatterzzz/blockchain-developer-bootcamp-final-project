@@ -1,0 +1,31 @@
+{
+  "name": "candy",
+  "version": "1.0.0",
+  "description": "*TL;DR;* Help kids to save and invest while parents can guide and choose where profits/rewards go.",
+  "main": "app2.js",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.0",
+    "@truffle/hdwallet-provider": "^1.7.0",
+    "alpinejs": "^3.5.1",
+    "autoprefixer": "^10.4.0",
+    "dotenv": "^10.0.0",
+    "parcel": "^2.0.0-nightly.916",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "web3": "^1.6.1"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://darkmatterzzz@github.com/darkmatterzzz/blockchain-developer-bootcamp-final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darkmatterzzz/blockchain-developer-bootcamp-final-project/issues"
+  },
+  "homepage": "https://github.com/darkmatterzzz/blockchain-developer-bootcamp-final-project#readme"
+}
