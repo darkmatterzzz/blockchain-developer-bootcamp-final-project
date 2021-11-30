@@ -8,7 +8,7 @@ npm install
 npm run start
 ```
 
-If all goes well you'll now be able to visit http://localhost:1234
+If all goes well you'll now be able to visit the localhost that the terminal has given you
 
 Make sure Ganache port is set to **8545**
 
@@ -26,6 +26,16 @@ truffle test
 ### Public Ethereum Account
 
 Public ETH account for NFT: ```0xcf527F30A21388E38A16b0439EDF709dFA88FeD7```
+
+### Live app on Vercel
+
+https://blockchain-developer-bootcamp-final-project-pkvy63cch.vercel.app/
+
+### Loom video with explantation
+https://www.loom.com/share/711a5437a8b24d1b93e342bd5cd52813
+
+### Github repository
+
 
 
 ### General idea
