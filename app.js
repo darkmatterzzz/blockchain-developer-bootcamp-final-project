@@ -67,7 +67,7 @@ document.addEventListener("alpine:init", () => {
         second_wallet: '',
         accessible: 0,
         //scCandy: '0x2B7D99765D985b45a89a361d4A7895C1746e6592',//'0x91c6E17Cf5427751de95467674265a7745993C4e',
-        ssCandy: '0xc3A3A29d0Bdd4c6A73eA51092CA2aCc50E381390', // Rinkeby contract address
+        scCandy: '0xc3A3A29d0Bdd4c6A73eA51092CA2aCc50E381390', // Rinkeby contract address
         mySaveables: [],
         mySaveablesData: [],
         myAccessibles: [],
