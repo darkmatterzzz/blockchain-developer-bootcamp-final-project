@@ -2,7 +2,6 @@
   "name": "candy",
   "version": "1.0.0",
   "description": "*TL;DR;* Help kids to save and invest while parents can guide and choose where profits/rewards go.",
-  "main": "app2.js",
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.0",
     "@truffle/hdwallet-provider": "^1.7.0",
@@ -15,8 +14,8 @@
     "web3": "^1.6.1"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build app.js"
+    "start": "parcel index.html && ",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
